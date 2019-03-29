@@ -1,0 +1,76 @@
+.param {
+    margin-bottom: 7px;
+    line-height: 1.4;
+}
+.param-inline dt {
+    display: inline-block;
+}
+.param dt {
+    margin: 0;
+    margin-right: 7px;
+    font-weight: 600;
+}
+.param-inline dd {
+    vertical-align: baseline;
+    display: inline-block;
+}
+
+.param dd {
+    margin: 0;
+    vertical-align: baseline;
+} 
+
+.shopping-cart-wrap .price {
+    font-size: 18px;
+    margin-right: 5px;
+    display: block;
+}
+var {
+    font-style: normal;
+}
+
+.media img {
+    margin-right: 1rem;
+}
+.img-sm {
+    width: 90px;
+    max-height: 75px;
+    object-fit: cover;
+}
+
+.margin-top{
+    margin-top: 15px;
+}
+
+#total{
+    color: #007bff;
+    font-weight: bold;
+}
+
+.list-group-item{
+    border:none
+}
+
+.form{
+    padding-top: 10px;
+}
+
+.font-size{
+    font-size: 13px !important;
+}
+.selecao{
+    display: inline-flex;
+    margin-left: 10px;
+}
+.total{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.badge.badge-pill{
+    font-size: 100%;
+}
+
+.row > button{
+    padding-left: 0px;
+}

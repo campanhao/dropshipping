@@ -1,0 +1,20 @@
+#search {
+    margin-bottom: 30px;
+    background-color:white;
+  }
+  
+  #search .container {
+    text-align: right;
+  }
+  
+  #search form {
+    max-width: 700px;
+  }
+
+  .paginacao{
+    padding-top: 30px !important;
+  }
+  .category {
+    width: 100%;
+  }
+  

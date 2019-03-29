@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar sticky-top">
+    <a class="navbar-brand" routerLink="/">Dropshipping</a>
+    <button class="navbar-toggler btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarTogglerDropshipping"
+        aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+        aria-controls="navbarTogglerDropshipping">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDropshipping" [ngbCollapse]="isCollapsed">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item" *ngIf="!(usuarioLogado$ | async)">
+                <a routerLink="/login" class="nav-link"><i class="fa fa-user"></i> Login</a>
+            </li>
+            <li ngbDropdown class="nav-item dropdown" *ngIf="(usuarioLogado$ | async)">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i>{{(usuarioLogado$ | async)}}
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/pedido"><i class="fa fa-shopping-bag"></i> Meus pedidos</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="sair()"><i class="fa fa-sign-out"></i> Sair</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/carrinho" title="Carrinho"> <i class="fa fa-cart-plus"></i>
+                    <span *ngIf="(quantidade$ | async)  > 0" class="ttip">{{quantidade$ | async}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

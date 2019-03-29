@@ -1,0 +1,111 @@
+<div *ngIf="!items().length && !btnFechar" class="margin-top">
+  <div class="alert alert-danger">
+    Aviso! Seu carrinho está vazio, clique<a routerLink="/" class="alert-link"> aqui </a> para voltar ao catálogo.
+  </div>
+</div>
+
+
+
+<form #form='ngForm' novalidate class="form">
+  <div class="row" *ngIf="items().length">
+    <div class="col-sm-6 col-xs-12">
+      <p class="lead ">Endereço de Entrega</p>
+      <div class="form-group">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let endereco of usuarioEndereco">
+            <input type="radio" [(ngModel)]="escolhaEndereco" required name="list_endereco" value="{{endereco.usuarioEnderecoId}}" />
+            <div class="selecao">
+              <span [innerHTML]="endereco.endereco"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <p class="lead ">Formas de Pagamento:</p>
+
+      <div class="form-group">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of formaPagamento">
+            <input type="radio" [(ngModel)]="escolhaFormaPagamento" required name="list_formaPagamento" value="{{item.formaPagamentoId}}" />
+            <div class="selecao">
+              <span [innerHTML]="item.nome"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+
+<div class="row" *ngIf="items().length">
+  <div class="col-sm-6 col-xs-12">
+    <p class="lead">Produtos selecionados:&nbsp;&nbsp;
+        <button (click)="clear()" type="button" class="btn btn-danger"><i class="fa fa-remove"></i>Limpar</button></p>
+  </div>
+</div>
+
+<div *ngIf="items().length">
+  <div class="table-responsive font-size">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produto</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Preço Unitário</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items()">
+          <td>{{item.produto.nome}}</td>
+          <td>
+            <span (click)="decreaseQty(item)" [style.visibility]="item.quantidade > 0 ? 'visible':'hidden'">
+              <i class="fa fa-minus icon-verde"></i>&nbsp;
+            </span>
+            {{item.quantidade}}&nbsp;
+            <span (click)="increaseQty(item)">
+              <i class="fa fa-plus icon-verde"></i>
+            </span>
+          </td>
+          <td>
+            <div style="display: inline-block;width: 90px;">
+              {{item.produto.preco | currency: 'BRL': true}}
+            </div>
+            <span (click)="removeItem(item)" class="badge badge-pill badge-danger">X</span>
+          </td>
+        </tr>
+        <tr class="total">
+          <td colspan="2">Total do carrinho:</td>
+          <td colspan="2" id="total">{{total() | currency: 'BRL': true}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12 col-xs-12 text-right" *ngIf="items().length">
+    <button routerLink="/catalogo" type="button" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>Comprar mais</button>
+    <button class="btn btn-success" (click)="open(content)" [disabled]="!form.valid || !items().length"><i class="fa fa-credit-card"></i>
+      Fechar Pedido</button>
+  </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Aviso!</h4>
+  </div>
+  <div class="modal-body">
+    <p>{{mensagem}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" *ngIf="btnNao" (click)="c('Close click')">Não</button>
+    <button type="button" class="btn btn-success" *ngIf="btnSim" (click)="salvar(content)">Sim</button>
+    <button type="button" class="btn btn-success" *ngIf="btnFechar" routerLink="/pedido" (click)="c('Close click')">Fechar</button>
+  </div>
+</ng-template>

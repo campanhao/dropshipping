@@ -1,0 +1,13 @@
+<div class="produto-card">
+    <div class="card-imagem">
+      <img class="img" src="./assets/{{produto.imagem}}.jpg">
+    </div>
+    <div class="produto-conteudo">
+      <h3 class="titulo">{{produto?.nome}}</h3>
+      <p>{{produto?.descricao}}</p>
+      <div class="preco">
+        {{produto?.preco | currency:'BRL':true}}
+      </div>
+      <a class="adicionar-carrinho" (click)="addItem(produto)">Adicionar <i class="fa fa-shopping-cart"></i></a>
+    </div>
+  </div>

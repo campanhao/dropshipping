@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-12 col-md-3" style="padding-bottom: 20px;">
+    <button (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" class="btn btn-secondary dropdown-toggle category"
+      type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Categorias
+    </button>
+    <div class="collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
+      <div class="list-group" *ngFor="let categoria of categorias">
+        <a class="list-group-item list-group-item-action" (click)="selecionarPorCategoria(categoria.categoriaId)">{{categoria.nome}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-9">
+    <div id="search" class="fixed-static">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <form role="search" class="ml-auto text-left">
+              <div class="input-group">
+                <input [(ngModel)]="valor" name="valor" placeholder="Pesquisar" class="form-control">
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-info" (click)="pesquisar()"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="items && items.length == 0" class="margin-top">
+      <div class="alert alert-warning">
+        Não foram encontrados produtos conforme a pesquisa !
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="row">
+        <div *ngFor="let item of pageOfItems" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+          <app-produto [produto]="item"></app-produto>
+        </div>
+      </div>
+    </section>
+
+    <div class="paginacao">
+      <jw-pagination class="jw" [pageSize]="8" [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+
+  </div>
+
+</div>

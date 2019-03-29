@@ -1,0 +1,12 @@
+<section class="content">
+  <div class="row">
+    <div *ngFor="let item of pageOfItems" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <app-pedido-item [pedido]="item"></app-pedido-item>
+    </div>
+
+  </div>
+
+  <div class="paginacao">
+    <jw-pagination [pageSize]="1"  class="jw" [items]="pedidos" (changePage)="onChangePage($event)"></jw-pagination>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Pedido realizado em {{pedido.data | date:'dd/MM/yyyy HH:mm:ss'}}
+
+    </div>
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-sm-6">
+          <h6 class="mb-3">Dados da entrega:</h6>
+          <div>{{pedido.pedidoEntrega.logradouro}}, {{pedido.pedidoEntrega.numero}}
+            {{pedido.pedidoEntrega.complemento}} </div>
+          <div>{{pedido.pedidoEntrega.bairro}}, {{pedido.pedidoEntrega.cidade}} {{pedido.pedidoEntrega.estado}}</div>
+          <div>{{pedido.pedidoEntrega.cep}}</div>
+          <div>Email: {{pedido.usuario.email}}</div>
+          <div>Celular: {{pedido.usuario.telefone}}</div>
+        </div>
+      </div>
+
+      <div class="table-responsive-sm">
+        <table class="table table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Cod. Pedido</th>
+              <th scope="col">Produto</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of pedido.pedidoItens">
+              <td>{{item.pedidoItemFornecedor.codPedidoItemFornec}}</td>
+              <td>{{item.nomeProduto}}</td>
+              <td>{{item.quantidade}}</td>
+              <td>{{item.precoUnitario | currency:'BRL':true}}</td>
+              <td>{{item.pedidoItemFornecedor.statusNome}}</td>
+            </tr>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-5 ml-auto">
+          <table class="table table-clear">
+            <tbody>
+              <tr>
+                <td class="left">
+                  <strong>Total do pedido:</strong>
+                </td>
+                <td class="right">
+                  <strong>{{pedido.valorTotal | currency:'BRL':true}}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
